@@ -18,7 +18,7 @@ export default function HomeScreen() {
         />
       }
     >
-      <ThemedView style={{ flexDirection: 'column' }}>
+      <ThemedView style={{ display: "contents", flexDirection: 'column' }}>
         <Button>7</Button>
         <Button>8</Button>
         <Button>9</Button>
