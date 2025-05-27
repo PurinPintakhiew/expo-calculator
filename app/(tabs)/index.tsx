@@ -18,16 +18,16 @@ export default function HomeScreen() {
         />
       }
     >
-      <ThemedView style={{ display: "contents", flexDirection: 'column' }}>
-        <Button>7</Button>
-        <Button>8</Button>
-        <Button>9</Button>
-        <Button>4</Button>
-        <Button>5</Button>
-        <Button>3</Button>
-        <Button>2</Button>
-        <Button>1</Button>
-        <Button>0</Button>
+      <ThemedView style={styles.gridContainer}>
+        <Button style={styles.button}>7</Button>
+        <Button style={styles.button}>8</Button>
+        <Button style={styles.button}>9</Button>
+        <Button style={styles.button}>4</Button>
+        <Button style={styles.button}>5</Button>
+        <Button style={styles.button}>3</Button>
+        <Button style={styles.button}>2</Button>
+        <Button style={styles.button}>1</Button>
+        <Button style={styles.button}>0</Button>
       </ThemedView>
     </ParallaxScrollView>
   );
@@ -49,5 +49,16 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  gridContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 8,
+    padding: 10,
+  },
+  button: {
+    width: '25%',
+    margin: 5,
   },
 });
