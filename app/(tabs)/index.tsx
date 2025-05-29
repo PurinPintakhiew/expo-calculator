@@ -29,6 +29,13 @@ export default function HomeScreen() {
         <Button style={styles.button}>1</Button>
         <Button style={styles.button}>0</Button>
       </ThemedView>
+      <ThemedView>
+        <Button>+</Button>
+        <Button>-</Button>
+        <Button>x</Button>
+        <Button>/</Button>
+        <Button>=</Button>
+      </ThemedView>
     </ParallaxScrollView>
   );
 }
