@@ -5,7 +5,7 @@ import './global.css';
 export default function App() {
   return (
     <View className='mt-5'>
-      <Text className='text-red-500'>Open up App.tsx to start working on your app!</Text>
+      <Text className='text-red-500'>Hello</Text>
       <StatusBar style="auto" />
     </View>
   );
