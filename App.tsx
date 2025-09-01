@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { thousandsSeparator } from 'thousands-separator-js';
 
 export default function App() {
   const [result, setResult] = useState(0);
@@ -33,7 +34,7 @@ export default function App() {
   return (
     <View className="h-screen mt-8">
       <View className='h-1/3 border rounded-md mb-2 p-4'>
-        <Text className='text-8xl font-bold text-right'>{result}</Text>
+        <Text className='text-8xl font-bold text-right'>{thousandsSeparator(result)}</Text>
       </View>
       {/* <View className='absolute bottom-0 left-0 right-0'> */}
       <View className='flex flex-row flex-wrap w-full'>
