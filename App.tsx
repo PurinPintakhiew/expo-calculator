@@ -17,7 +17,11 @@ export default function App() {
 
   const onHandelDel = () => {
     try {
-
+      const arrResult = result.toString().split('');
+      if (arrResult.length > 0) {
+        arrResult.pop();
+        setResult(Number(arrResult.join('') || 0));
+      }
     } catch (error) {
       console.error(error);
     }
@@ -125,7 +129,10 @@ export default function App() {
         >
           <Text className='text-2xl font-bold'>0</Text>
         </TouchableOpacity>
-        <TouchableOpacity className='w-1/4 aspect-square justify-center items-center border rounded-md'>
+        <TouchableOpacity
+          className='w-1/4 aspect-square justify-center items-center border rounded-md'
+          onPress={onHandelDel}
+        >
           <Text className='text-2xl font-bold'>Del</Text>
         </TouchableOpacity>
         <TouchableOpacity className='w-1/4 aspect-square justify-center items-center border rounded-md'>
