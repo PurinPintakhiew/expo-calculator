@@ -40,7 +40,6 @@ export default function App() {
       <View className='h-1/3 border rounded-md mb-2 p-4'>
         <Text className='text-8xl font-bold text-right'>{thousandsSeparator(result)}</Text>
       </View>
-      {/* <View className='absolute bottom-0 left-0 right-0'> */}
       <View className='flex flex-row flex-wrap w-full'>
         <TouchableOpacity
           className='w-1/4 aspect-square justify-center items-center border rounded-md'
@@ -139,7 +138,6 @@ export default function App() {
           <Text className='text-2xl font-bold'>=</Text>
         </TouchableOpacity>
       </View>
-      {/* </View> */}
     </View>
   );
 }
