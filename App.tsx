@@ -26,10 +26,20 @@ export default function App() {
 
   const onHandelDel = () => {
     try {
-      const arrResult = result.toString().split("");
-      if (arrResult.length > 0) {
-        arrResult.pop();
-        setResult(Number(arrResult.join("") || 0));
+      if (operand) {
+        const arrResult = operand.toString().split("");
+        if (arrResult.length > 0) {
+          arrResult.pop();
+          setOperand(Number(arrResult.join("") || 0));
+        }
+      } else if (result) {
+        const arrResult = result.toString().split("");
+        if (arrResult.length > 0) {
+          arrResult.pop();
+          setResult(Number(arrResult.join("") || 0));
+        }
+      } else {
+        onHandelClear();
       }
     } catch (error) {
       console.error(error);
