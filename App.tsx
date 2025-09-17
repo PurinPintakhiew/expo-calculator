@@ -91,7 +91,31 @@ export default function App() {
     } else {
       return '';
     }
-  }
+  };
+
+  const onHandleDecimal = () => {
+    try {
+      if (operand >= 0) {
+        const numberStr: string = operand.toString();
+        const [integerPart, decimalPart] = numberStr?.split(".");
+        if (decimalPart) {
+          console.log("operand has decimal");
+        } else {
+          console.log("operand not has decimal");
+        }
+      } else if (result >= 0) {
+        const numberStr: string = result.toString();
+        const [integerPart, decimalPart] = numberStr?.split(".");
+        if (decimalPart) {
+          console.log("result has decimal");
+        } else {
+          console.log("result not has decimal");
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-gray-100">
@@ -135,7 +159,7 @@ export default function App() {
           <Button label="3" onPress={() => onHandelReceiveValue(3)} />
           <Button label="+" type="operator" onPress={() => setOperator('plus')} />
 
-          <Button label="." />
+          <Button label="." onPress={() => onHandleDecimal()} />
           <Button label="0" onPress={() => onHandelReceiveValue(0)} />
           <Button onPress={onHandelDel} icon="backspace" type="action" />
           <Button label="=" type="operator" onPress={() => onHandelCalculator()} />
