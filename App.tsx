@@ -2,7 +2,6 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { Text, View, SafeAreaView } from "react-native";
 import { thousandsSeparator } from "thousands-separator-js";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { Button } from "components/Button";
 
 type OperatorType = 'plus' | 'minus' | 'multiply' | 'divide' | '';
