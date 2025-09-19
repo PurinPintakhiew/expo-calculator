@@ -7,112 +7,93 @@ import { Button } from "components/Button";
 type OperatorType = 'plus' | 'minus' | 'multiply' | 'divide' | '';
 
 export default function App() {
-  const [result, setResult] = useState(0);
+  const [result, setResult] = useState<number>(0);
   const [operator, setOperator] = useState<OperatorType>('');
-  const [operand, setOperand] = useState(0);
+  const [operand, setOperand] = useState<number>(0);
 
-  const onHandelReceiveValue = (val: number) => {
+  const handleReceiveValue = (val: number) => {
     try {
       if (operator) {
-        setOperand(Number(operand.toString() + val.toString()));
+        setOperand(Number(`${operand || ''}${val}`));
       } else {
-        setResult(Number(result.toString() + val.toString()));
+        setResult(Number(`${result || ''}${val}`));
       }
     } catch (error) {
-      console.error(error);
+      console.error('handleReceiveValue error:', error);
     }
   };
 
-  const onHandelDel = () => {
+  const handleDel = () => {
     try {
       if (operand) {
-        const arrResult = operand.toString().split("");
-        if (arrResult.length > 0) {
-          arrResult.pop();
-          setOperand(Number(arrResult.join("") || 0));
-        }
+        const newVal = operand.toString().slice(0, -1);
+        setOperand(Number(newVal) || 0);
       } else if (result) {
-        const arrResult = result.toString().split("");
-        if (arrResult.length > 0) {
-          arrResult.pop();
-          setResult(Number(arrResult.join("") || 0));
-        }
+        const newVal = result.toString().slice(0, -1);
+        setResult(Number(newVal) || 0);
       } else {
-        onHandelClear();
+        handleClear();
       }
     } catch (error) {
-      console.error(error);
+      console.error('handleDel error:', error);
     }
   };
 
-  const onHandelClear = () => {
-    try {
-      setResult(0);
-      setOperand(0);
-      setOperator('');
-    } catch (error) {
-      console.error(error);
-    }
+  const handleClear = () => {
+    setResult(0);
+    setOperand(0);
+    setOperator('');
   };
 
-  const onHandelCalculator = () => {
+  const handleCalculator = () => {
     try {
+      let calcResult = result;
       switch (operator) {
         case 'plus':
-          setResult(Number(result + operand));
+          calcResult = result + operand;
           break;
         case 'minus':
-          setResult(Number(result - operand));
+          calcResult = result - operand;
           break;
         case 'multiply':
-          setResult(Number(result * operand));
+          calcResult = result * operand;
           break;
         case 'divide':
-          setResult(Number(result / operand));
+          calcResult = operand !== 0 ? result / operand : 0;
           break;
       }
+      setResult(calcResult);
       setOperand(0);
       setOperator('');
     } catch (error) {
-      console.error(error);
+      console.error('handleCalculator error:', error);
     }
   };
 
   const operatorSymbol = (op: OperatorType) => {
-    if (op === 'plus') {
-      return '+';
-    } else if (op === 'minus') {
-      return '−';
-    } else if (op === 'multiply') {
-      return '×';
-    } else if (op === 'divide') {
-      return '÷';
-    } else {
-      return '';
-    }
+    const map: Record<OperatorType, string> = {
+      plus: '+',
+      minus: '−',
+      multiply: '×',
+      divide: '÷',
+      '': '',
+    };
+    return map[op];
   };
 
-  const onHandleDecimal = () => {
+  const handleDecimal = () => {
     try {
-      if (operand >= 0) {
-        const numberStr: string = operand.toString();
-        const [integerPart, decimalPart] = numberStr?.split(".");
-        if (decimalPart) {
-          console.log("operand has decimal");
-        } else {
-          console.log("operand not has decimal");
+      if (operator) {
+        if (!operand.toString().includes('.')) {
+          setOperand(Number(`${operand}.`));
         }
-      } else if (result >= 0) {
-        const numberStr: string = result.toString();
-        const [integerPart, decimalPart] = numberStr?.split(".");
-        if (decimalPart) {
-          console.log("result has decimal");
-        } else {
-          console.log("result not has decimal");
+      } else {
+        if (!result.toString().includes('.')) {
+          setResult(Number(`${result}.`));
         }
       }
     } catch (error) {
-      console.error(error);
+      console.error('handleDecimal error:', error);
     }
   };
 
@@ -127,41 +108,38 @@ export default function App() {
             numberOfLines={1}
             adjustsFontSizeToFit
           >
-            {
-              operand ?
-                `${thousandsSeparator(result)} ${operatorSymbol(operator)} ${thousandsSeparator(operand)}`
-                :
-                thousandsSeparator(result)
-            }
+            {operand
+              ? `${thousandsSeparator(result)} ${operatorSymbol(operator)} ${thousandsSeparator(operand)}`
+              : thousandsSeparator(result)}
           </Text>
         </View>
 
         {/* Buttons */}
         <View className="flex flex-row flex-wrap justify-center">
-          <Button label="AC" onPress={onHandelClear} type="action" />
+          <Button label="AC" onPress={handleClear} type="action" />
           <Button label="( )" type="action" />
           <Button label="%" type="action" />
           <Button label="÷" type="operator" onPress={() => setOperator('divide')} />
 
-          <Button label="7" onPress={() => onHandelReceiveValue(7)} />
-          <Button label="8" onPress={() => onHandelReceiveValue(8)} />
-          <Button label="9" onPress={() => onHandelReceiveValue(9)} />
+          <Button label="7" onPress={() => handleReceiveValue(7)} />
+          <Button label="8" onPress={() => handleReceiveValue(8)} />
+          <Button label="9" onPress={() => handleReceiveValue(9)} />
           <Button label="×" type="operator" onPress={() => setOperator('multiply')} />
 
-          <Button label="4" onPress={() => onHandelReceiveValue(4)} />
-          <Button label="5" onPress={() => onHandelReceiveValue(5)} />
-          <Button label="6" onPress={() => onHandelReceiveValue(6)} />
+          <Button label="4" onPress={() => handleReceiveValue(4)} />
+          <Button label="5" onPress={() => handleReceiveValue(5)} />
+          <Button label="6" onPress={() => handleReceiveValue(6)} />
           <Button label="−" type="operator" onPress={() => setOperator('minus')} />
 
-          <Button label="1" onPress={() => onHandelReceiveValue(1)} />
-          <Button label="2" onPress={() => onHandelReceiveValue(2)} />
-          <Button label="3" onPress={() => onHandelReceiveValue(3)} />
+          <Button label="1" onPress={() => handleReceiveValue(1)} />
+          <Button label="2" onPress={() => handleReceiveValue(2)} />
+          <Button label="3" onPress={() => handleReceiveValue(3)} />
           <Button label="+" type="operator" onPress={() => setOperator('plus')} />
 
-          <Button label="." onPress={() => onHandleDecimal()} />
-          <Button label="0" onPress={() => onHandelReceiveValue(0)} />
-          <Button onPress={onHandelDel} icon="backspace" type="action" />
-          <Button label="=" type="operator" onPress={() => onHandelCalculator()} />
+          <Button label="." onPress={handleDecimal} />
+          <Button label="0" onPress={() => handleReceiveValue(0)} />
+          <Button onPress={handleDel} icon="backspace" type="action" />
+          <Button label="=" type="operator" onPress={handleCalculator} />
         </View>
       </View>
     </SafeAreaView>
