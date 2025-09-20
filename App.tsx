@@ -10,6 +10,8 @@ export default function App() {
   const [result, setResult] = useState<number>(0);
   const [operator, setOperator] = useState<OperatorType>('');
   const [operand, setOperand] = useState<number>(0);
+  const [resultDecimal, setResultDecimal] = useState(false);
+  const [operandDecimal, setOperandtDecimal] = useState(false);
 
   const handleReceiveValue = (val: number) => {
     try {
