@@ -10,18 +10,18 @@ export default function App() {
   const [result, setResult] = useState<number>(0);
   const [operator, setOperator] = useState<OperatorType>('');
   const [operand, setOperand] = useState<number>(0);
-  const [resultDecimal, setResultDecimal] = useState(false);
-  const [operandDecimal, setOperandtDecimal] = useState(false);
+  const [resultStr, setResultStr] = useState("0");
+  const [operandStr, setOperandStr] = useState("");
 
   const handleReceiveValue = (val: number) => {
-    try {
-      if (operator) {
-        setOperand(Number(`${operand || ''}${val}`));
-      } else {
-        setResult(Number(`${result || ''}${val}`));
-      }
-    } catch (error) {
-      console.error('handleReceiveValue error:', error);
+    if (operator) {
+      const newStr = operandStr ? operandStr + val : val.toString();
+      setOperandStr(newStr);
+      setOperand(parseFloat(newStr));
+    } else {
+      const newStr = resultStr !== "0" ? resultStr + val : val.toString();
+      setResultStr(newStr);
+      setResult(parseFloat(newStr));
     }
   };
 
@@ -45,32 +45,36 @@ export default function App() {
     setResult(0);
     setOperand(0);
     setOperator('');
+    setOperandStr("");
+    setResultStr("0");
   };
 
   const handleCalculator = () => {
-    try {
-      let calcResult = result;
-      switch (operator) {
-        case 'plus':
-          calcResult = result + operand;
-          break;
-        case 'minus':
-          calcResult = result - operand;
-          break;
-        case 'multiply':
-          calcResult = result * operand;
-          break;
-        case 'divide':
-          calcResult = operand !== 0 ? result / operand : 0;
-          break;
-      }
-      setResult(calcResult);
-      setOperand(0);
-      setOperator('');
-    } catch (error) {
-      console.error('handleCalculator error:', error);
+    const num1 = parseFloat(resultStr);
+    const num2 = parseFloat(operandStr || "0");
+    let calcResult = num1;
+
+    switch (operator) {
+      case "plus":
+        calcResult = num1 + num2;
+        break;
+      case "minus":
+        calcResult = num1 - num2;
+        break;
+      case "multiply":
+        calcResult = num1 * num2;
+        break;
+      case "divide":
+        calcResult = num2 !== 0 ? num1 / num2 : 0;
+        break;
     }
+    setResult(calcResult);
+    setResultStr(calcResult.toString());
+    setOperand(0);
+    setOperandStr("");
+    setOperator("");
   };
+
 
   const operatorSymbol = (op: OperatorType) => {
     const map: Record<OperatorType, string> = {
@@ -84,18 +88,16 @@ export default function App() {
   };
 
   const handleDecimal = () => {
-    try {
-      if (operator) {
-        if (!operand.toString().includes('.')) {
-          setOperand(Number(`${operand}.`));
-        }
-      } else {
-        if (!result.toString().includes('.')) {
-          setResult(Number(`${result}.`));
-        }
+    if (operator) {
+      if (!operandStr.includes(".")) {
+        const newStr = operandStr ? operandStr + "." : "0.";
+        setOperandStr(newStr);
       }
-    } catch (error) {
-      console.error('handleDecimal error:', error);
+    } else {
+      if (!resultStr.includes(".")) {
+        const newStr = resultStr ? resultStr + "." : "0.";
+        setResultStr(newStr);
+      }
     }
   };
 
