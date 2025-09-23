@@ -12,6 +12,7 @@ export default function App() {
   const [operand, setOperand] = useState<number>(0);
   const [resultStr, setResultStr] = useState("0");
   const [operandStr, setOperandStr] = useState("");
+  const [expression, setExpression] = useState("");
 
   const handleReceiveValue = (val: number) => {
     try {
@@ -113,6 +114,20 @@ export default function App() {
     }
   };
 
+  const handlePercent = () => {
+    try {
+      if (expression) {
+        const newExp = expression + "/100";
+        setExpression(newExp);
+      } else if (result) {
+        setResult(result / 100);
+        setResultStr((result / 100).toString());
+      }
+    } catch (error) {
+      console.error('handlePercent error:', error);
+    }
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-gray-100">
       <StatusBar style="auto" />
@@ -134,7 +149,7 @@ export default function App() {
         <View className="flex flex-row flex-wrap justify-center">
           <Button label="AC" onPress={handleClear} type="action" />
           <Button label="( )" type="action" />
-          <Button label="%" type="action" />
+          <Button label="%" type="action" onPress={handlePercent}/>
           <Button label="÷" type="operator" onPress={() => setOperator('divide')} />
 
           <Button label="7" onPress={() => handleReceiveValue(7)} />
