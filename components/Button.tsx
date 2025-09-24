@@ -26,7 +26,7 @@ const Button = ({
         <TouchableOpacity
             onPress={onPress}
             className={`w-1/5 aspect-square m-1 rounded-2xl shadow-md justify-center items-center ${bg}`}
-            activeOpacity={0.7}
+            activeOpacity={0.8}
         >
             {icon ? (
                 <FontAwesome5 name={icon} size={28} color={type === "operator" ? "#fff" : "#333"} />
