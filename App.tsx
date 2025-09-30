@@ -133,7 +133,7 @@ export default function App() {
       <StatusBar style="auto" />
       <View className="flex-1 px-3 py-5">
         {/* Display */}
-        <View className="h-1/4 bg-white rounded-2xl shadow-md p-4 justify-end items-end mb-3">
+        <View className="h-1/4 bg-white rounded-2xl shadow-md p-4 justify-end items-end mb-4">
           <Text
             className="text-5xl font-bold text-gray-900"
             numberOfLines={1}
