@@ -1,3 +1,3 @@
 # Calculator
 
-![App Image](https://github.com/PurinPintakhiew/expo-calculator/assets/calculator.png)
+![App Image](assets/calculator.png)
