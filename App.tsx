@@ -128,12 +128,21 @@ export default function App() {
     }
   };
 
+  const handleParenthesis = () => {
+    try {
+
+    } catch (error) {
+      console.error('handleParenthesis error:', error);
+    }
+  };
+
+
   return (
     <SafeAreaView className="flex-1 bg-gray-100">
       <StatusBar style="auto" />
       <View className="flex-1 px-3 py-5">
         {/* Display */}
-        <View className="h-1/4 bg-white rounded-2xl shadow-md p-4 justify-end items-end mb-4">
+        <View className="h-2/5 bg-white rounded-2xl shadow-md p-4 justify-end items-end mb-4">
           <Text
             className="text-5xl font-bold text-gray-900"
             numberOfLines={1}
@@ -146,10 +155,10 @@ export default function App() {
         </View>
 
         {/* Buttons */}
-        <View className="flex flex-row flex-wrap justify-center">
+        <View className="h-3/5 flex flex-row flex-wrap justify-center">
           <Button label="AC" onPress={handleClear} type="action" />
-          <Button label="( )" type="action" />
-          <Button label="%" type="action" onPress={handlePercent}/>
+          <Button label="( )" type="action" onPress={handleParenthesis} disabled/>
+          <Button label="%" type="action" onPress={handlePercent} />
           <Button label="÷" type="operator" onPress={() => setOperator('divide')} />
 
           <Button label="7" onPress={() => handleReceiveValue(7)} />
