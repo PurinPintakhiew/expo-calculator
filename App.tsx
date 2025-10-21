@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { Text, View, SafeAreaView } from "react-native";
-import { thousandsSeparator } from "thousands-separator-js";
 import { Button } from "components/Button";
+import { thousandsSeparator } from "@saimcore/thousands-separator-js";
 
 type OperatorType = 'plus' | 'minus' | 'multiply' | 'divide' | '';
 

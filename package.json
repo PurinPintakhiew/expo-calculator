@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@saimcore/thousands-separator-js": "^1.0.1",
     "expo": "~53.0.22",
     "expo-status-bar": "~2.2.3",
     "nativewind": "^4.1.23",
@@ -16,8 +17,7 @@
     "react": "19.0.0",
     "react-native": "0.79.6",
     "react-native-reanimated": "~3.17.4",
-    "react-native-safe-area-context": "^5.4.0",
-    "thousands-separator-js": "^1.0.0"
+    "react-native-safe-area-context": "^5.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
